@@ -1,0 +1,14 @@
+arzt
+bank
+bedienungsanleitung
+buch
+familie
+finanzamt
+info
+job
+rechnung
+schule
+sport
+versicherung
+vertrag
+werbung

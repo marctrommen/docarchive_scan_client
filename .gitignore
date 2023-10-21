@@ -1,0 +1,22 @@
+# Python project cache directory
+__pycache__
+__pycache__/**
+
+# Python virtual environment
+bin
+bin/**
+lib
+lib/**
+lib64
+lib64/**
+pyvenv.cfg
+
+# local configuration files
+# locally adopted config file from config_handler_template.sh
+config_handler.sh
+
+# locally adopted config file from dialogs/keywords_template.txt
+dialogs/keywords.txt
+
+# locally adopted config file from dialogs/storage_locations_template.txt
+dialogs/storage_locations.txt

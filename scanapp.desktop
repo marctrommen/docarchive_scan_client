@@ -1,0 +1,18 @@
+[Desktop Entry]
+Name=Scan-App
+Name[de]=Scan-App
+Name[en_GB]=Scan-App
+GenericName=Terminal
+GenericName[de]=Terminal
+GenericName[en_GB]=Terminal
+Comment=Use the command line
+Comment[de]=Befehlszeile verwenden
+Comment[en_GB]=Use the command line
+Exec=/home/marco/Scratchbook/docarchiv/scan_client/run.sh
+Terminal=true
+Icon=/home/marco/Scratchbook/docarchiv/scan_client/scan_app.png
+Type=Application
+Categories=GTK;System;TerminalEmulator;
+Keywords=console;command line;execute;
+Keywords[de]=Konsole;Befehlszeile;Ausführen;
+Path=/home/marco/Scratchbook/docarchiv/scan_client

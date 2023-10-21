@@ -4,7 +4,7 @@
 # 
 # -----------------------------------------------------------------------------
 # AUTHOR ........ Marcus Trommen (mailto:marcus.trommen@gmx.net)
-# LAST CHANGE ... 2022-01-03
+# LAST CHANGE ... 2022-02-19
 # =============================================================================
 
 source ${SCAN_SCRIPT_BASE_DIRECTORY}/config_handler.sh
@@ -16,7 +16,7 @@ source ${SCAN_SCRIPT_BASE_DIRECTORY}/dialogs/library.sh
 # --------------------------
 TITEL="Details zum Scan"
 QUESTION="Wie sind die Seiten des Dokuments ausgerichtet?"
-ITEM_LIST='"1" "Hochformat" "2" "Querformat"'
+ITEM_LIST='"1" "Hochformat" "2" "Querformat" "3" "Spezial: Sparda-Kontoauszug"'
 COMMAND="${DIALOG} --backtitle '${BACKTITEL}' --title '${TITEL}' --no-cancel --no-shadow --menu '${QUESTION}' 0 0 5"
 ANSWER=$(eval $COMMAND "$ITEM_LIST" 3>&1 1>&2 2>&3)
 # Get the exit status
@@ -36,6 +36,9 @@ case "${ANSWER}" in
 	;;
 	2)
 	SCAN_DOCUMENT_ORIENTATION="landscape"
+	;;
+	3)
+	SCAN_DOCUMENT_ORIENTATION="special_sparda_kontoauszug"
 	;;
 esac			
 

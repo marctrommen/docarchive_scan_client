@@ -4,7 +4,7 @@
 # 
 # -----------------------------------------------------------------------------
 # AUTHOR ........ Marcus Trommen (mailto:marcus.trommen@gmx.net)
-# LAST CHANGE ... 2022-01-03
+# LAST CHANGE ... 2022-02-19
 # =============================================================================
 
 source ${SCAN_SCRIPT_BASE_DIRECTORY}/config_handler.sh

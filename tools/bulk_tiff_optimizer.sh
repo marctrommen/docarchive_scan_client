@@ -21,7 +21,7 @@
 # 
 # -----------------------------------------------------------------------------
 # AUTHOR ........ Marcus Trommen (mailto:marcus.trommen@gmx.net)
-# LAST CHANGE ... 2022-01-03
+# LAST CHANGE ... 2022-02-20
 # =============================================================================
 
 source ${SCAN_SCRIPT_BASE_DIRECTORY}/config_handler.sh
@@ -47,7 +47,7 @@ for directory_item in ${DIRECTORY_LIST}; do
 		printf "%s\n" "$directory_item" >/dev/stderr
 		printf "   - optimize TIFF files while transforming them to PNG files\n" >/dev/stderr
 		# optimize TIFF files while transforming them to PNG files
-		export SCAN_WORKING_DIRECTORY="$directory_item"
+		export SCAN_WORKING_DIRECTORY="${directory_item}"
 		# SCAN_DOCUMENT_ID: see id-parameter of JSON in Working-Directory
 		${PYTHON} ${SCAN_SCRIPT_BASE_DIRECTORY}/scantools/optimize_scans.py >/dev/stderr
 	fi
@@ -62,17 +62,21 @@ for directory_item in ${DIRECTORY_LIST}; do
 		printf "   - create PDF file\n" >/dev/stderr
 
 		# check if PNG files need 90 degrees clockwise rotation
-		cat $directory_item/*json | grep 'landscape' 1> /dev/null 2> /dev/null
+		# SCAN_DOCUMENT_ID: see id-parameter of JSON in Working-Directory
+		answer=$(${PYTHON} ${SCAN_SCRIPT_BASE_DIRECTORY}/tools/get_item_from_json.py $directory_item/*json "orientation")
+		echo "answer=${answer}"
 		if [[ $? -eq 0 ]] ; then
-			for png_file in ${directory_item}/*png ; do
-				${MOGRIFY} -rotate 90 $png_file 2>/dev/null
-			done
+			if [[ "${answer}" = "landscape" || "${answer}" = "special_sparda_kontoauszug" ]] ; then
+				for png_file in ${directory_item}/*png ; do
+					${MOGRIFY} -rotate 90 ${png_file} 2>/dev/null
+				done
+			fi
 		fi
 		
 		# create a PDF file out of the PNG files
 		export SCAN_WORKING_DIRECTORY="$directory_item"
 		export SCAN_DOCUMENT_ID=$(basename $directory_item)
-		${PYTHON} ${SCAN_SCRIPT_BASE_DIRECTORY}/scantools/create_pdf.py 1> /dev/null 2> /dev/null
+		${PYTHON} ${SCAN_SCRIPT_BASE_DIRECTORY}/scantools/create_pdf.py 1>/dev/null 2>/dev/null
 	fi
 	
 	dir_has_files "$directory_item" "tiff"; has_tiff=$?

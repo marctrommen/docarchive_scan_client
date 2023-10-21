@@ -4,7 +4,7 @@
 # IMPORTANT:
 #
 # This script is a module to deliver some helper functions. Therefore it 
-# should get sourced by any parent script script!
+# should get sourced by any parent script!
 #
 # -----------------------------------------------------------------------------
 # Available functions are:
@@ -37,7 +37,7 @@
 #
 # -----------------------------------------------------------------------------
 # AUTHOR ........ Marcus Trommen (mailto:marcus.trommen@gmx.net)
-# LAST CHANGE ... 2022-01-04
+# LAST CHANGE ... 2023-10-21
 # =============================================================================
 
 

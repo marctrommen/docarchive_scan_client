@@ -62,7 +62,8 @@ while [ "${USER_EXIT}" = "false" ]; do
 				"${SCAN_DEVICE}" \
 				"${SCAN_WORKING_DIRECTORY}" \
 				"${SCAN_DOCUMENT_ID}" \
-				"${PAGE_NUMBER}"
+				"${PAGE_NUMBER}" \
+				"${SCAN_DOCUMENT_ORIENTATION}"
 			EXIT_STATUS=$?
 			
 			if [[ ${EXIT_STATUS} -gt 0 ]]; then
@@ -89,7 +90,7 @@ show_info \
 	"${TITEL}\n\nKontrast verbessern ..."
 
 for tiff_file in ${SCAN_WORKING_DIRECTORY}/${SCAN_DOCUMENT_ID}_???.tiff; do
-	${MOGRIFY} -sigmoidal-contrast 3,0% "${tiff_file}"
+	${MOGRIFY} -sigmoidal-contrast 2,0% "${tiff_file}"
 done
 
 exit 0

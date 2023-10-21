@@ -59,7 +59,7 @@ QUESTION=$(printf "%s%s%s" \
     "\nEs wird zwischen aufeinanderfolgende Scan-Durchläufe gewartet. " \
     "Die Wartezeit kann eingestellt werden.\n\n" \
     "Deine Auswahl?\n")
-ITEM_LIST='"10" "10 Sekunden     " "15" "15 Sekunden     "'
+ITEM_LIST='"10" "Sekunden     " "15" "Sekunden     "'
 COMMAND="${DIALOG} --backtitle '${BACKTITEL}' --title '${TITEL}' --no-cancel --no-shadow --menu '${QUESTION}' 15 65 2"
 ANSWER=$(eval $COMMAND $ITEM_LIST 3>&1 1>&2 2>&3)
 DIALOG_EXIT_STATUS=$?

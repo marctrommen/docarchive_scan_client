@@ -4,7 +4,7 @@
 # 
 # -----------------------------------------------------------------------------
 # AUTHOR ........ Marcus Trommen (mailto:marcus.trommen@gmx.net)
-# LAST CHANGE ... 2022-01-03
+# LAST CHANGE ... 2022-02-01
 # =============================================================================
 
 source ${SCAN_SCRIPT_BASE_DIRECTORY}/config_handler.sh
@@ -43,7 +43,7 @@ fi
 # --------------------------------------------
 # Dialog: select pdf file to copy via file selection, called as function
 # --------------------------------------------
-SOURCE_PDF_FILE=$(filtered_file_selection ${BACKTITEL} ${HOME} '*.pdf')
+SOURCE_PDF_FILE=$(filtered_file_selection ${BACKTITEL} ${HOME} "*.[pP][dD][fF]")
 DIALOG_EXIT_STATUS=$?
 
 if [[ ${DIALOG_EXIT_STATUS} -gt 0 ]]; then

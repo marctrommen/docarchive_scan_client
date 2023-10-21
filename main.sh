@@ -17,7 +17,7 @@ let "USER_EXIT=0"
 while [[ ${USER_EXIT} -eq 0 ]]; do
 	TITEL="Hauptmenü"
 	QUESTION="Deine Auswahl?"
-	ITEM_LIST='"1" "Scanner auswählen und initialisieren" "2" "Dokumentdaten erfassen" "3" "PDF zum Archiv hinzufügen" "4" "Dokument scannen" "5" "Buch scannen mit Flachbett-Scanner" "6" "PDF aktualisieren (ohne Scan)" "7" "Alle neu gescannten Dokumente in PDF umwandeln" "8" "Ende"'
+	ITEM_LIST='"1" "Scanner auswählen und initialisieren" "2" "Dokumentdaten erfassen" "3" "PDF zum Archiv hinzufügen" "4" "Dokument scannen" "5" "Buch scannen mit Flachbett-Scanner" "6" "PDF aktualisieren (ohne Scan)" "7" "Alle neu gescannten Dokumente in PDF umwandeln" "8" "Dokument-Sync zu Raspi VPN" "9" "Dokument-Sync zu SSD" "10" "Ende"'
 	COMMAND="${DIALOG} --backtitle '${BACKTITEL}' --title '${TITEL}' --no-cancel --no-shadow --menu '${QUESTION}' 15 60 8"
 	ANSWER=$(eval $COMMAND $ITEM_LIST 3>&1 1>&2 2>&3)
 	DIALOG_EXIT_STATUS=$?
@@ -148,7 +148,32 @@ while [[ ${USER_EXIT} -eq 0 ]]; do
 
 				${BASH} ${SCAN_SCRIPT_BASE_DIRECTORY}/tools/bulk_tiff_optimizer.sh
 				;;
-			8)
+			8)	# Dokument-Sync zu Raspi VPN
+				touch ${SCAN_ARCHIVE_BASE_DIRECTORY}/semaphore
+				if [[ ! -e ${SCAN_ARCHIVE_BASE_DIRECTORY}/semaphore ]]; then
+					echo "error"
+					sleep 5
+				fi;
+				rsync --delete -urtvze ssh ${SCAN_ARCHIVE_BASE_DIRECTORY} vpn:/mnt/www/docarchive
+				ERROR_CODE=$?
+				if [[ $ERROR_CODE -gt 0 ]]; then
+					show_message \
+						"${BACKTITEL}" \
+						"FEHLER" \
+						"Es trat ein Fehler beim Synchronisieren des Dokumentarchivs\nmit dem Raspberry Pi VPN auf."
+				fi;
+				;;
+			9)	# Dokument-Sync zu SSD
+				rsync --delete -urtv ${SCAN_ARCHIVE_BASE_DIRECTORY} /media/marco/marco/DocArchive
+				ERROR_CODE=$?
+				if [[ $ERROR_CODE -gt 0 ]]; then
+					show_message \
+						"${BACKTITEL}" \
+						"FEHLER" \
+						"Es trat ein Fehler beim Synchronisieren des Dokumentarchivs\nmit der externen SSD auf."
+				fi;
+				;;
+			10)
 				# Ende
 				let "USER_EXIT=1"
 				reset_config

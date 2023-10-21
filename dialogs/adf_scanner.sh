@@ -15,7 +15,7 @@
 # 
 # -----------------------------------------------------------------------------
 # AUTHOR ........ Marcus Trommen (mailto:marcus.trommen@gmx.net)
-# LAST CHANGE ... 2022-01-03
+# LAST CHANGE ... 2022-02-20
 # =============================================================================
 
 source ${SCAN_SCRIPT_BASE_DIRECTORY}/config_handler.sh
@@ -60,7 +60,8 @@ while [[ ${UI_LOOP_BREAK} -eq 0 ]]; do
 				"${SCAN_DEVICE}" \
 				"${SCAN_WORKING_DIRECTORY}" \
 				"${SCAN_DOCUMENT_ID}" \
-				"${PAGE_NUMBER}"
+				"${PAGE_NUMBER}" \
+				"${SCAN_DOCUMENT_ORIENTATION}"
 			EXIT_STATUS=$?
 			
 			if [[ ${EXIT_STATUS} -gt 0 ]]; then
@@ -82,6 +83,21 @@ done
 # post-scan improvements
 # --------------------------------------------
 TITEL="Scan-Dateien aufbereiten"
+
+
+# --------------------------------------------
+# cut borders
+# --------------------------------------------
+show_info \
+	"${BACKTITEL}" \
+	"${TITEL}\n\nRänder zuschneiden ..."
+SHAVE_VALUE="55x2"
+if [[ "${SCAN_DOCUMENT_ORIENTATION}" = "special_sparda_kontoauszug" ]] ; then
+	SHAVE_VALUE="660x0"
+fi
+for tiff_file in ${SCAN_WORKING_DIRECTORY}/${SCAN_DOCUMENT_ID}_???.tiff; do
+	${MOGRIFY} -shave ${SHAVE_VALUE} "${tiff_file}"
+done
 
 
 # --------------------------------------------
@@ -137,17 +153,6 @@ for tiff_file in ${SCAN_WORKING_DIRECTORY}/${SCAN_DOCUMENT_ID}_???.tiff; do
 	let "PAGE_NUMBER++"
 done
 
-
-
-# --------------------------------------------
-# cut borders
-# --------------------------------------------
-show_info \
-	"${BACKTITEL}" \
-	"${TITEL}\n\nRänder zuschneiden ..."
-for tiff_file in ${SCAN_WORKING_DIRECTORY}/${SCAN_DOCUMENT_ID}_???.tiff; do
-	${MOGRIFY} -shave 55x2 "${tiff_file}"
-done
 
 
 exit 0

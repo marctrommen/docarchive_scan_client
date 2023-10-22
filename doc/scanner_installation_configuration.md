@@ -103,3 +103,61 @@ root@debianvm:~#
 ```
 
 sollte nun funktionieren!
+
+## HP Officejet Pro 8600 installieren
+
+### Links
+
+*   [UbuntuUsers - HPLIP](https://wiki.ubuntuusers.de/HPLIP/)
+*   [HP - HPLIP](https://developers.hp.com/hp-linux-imaging-and-printing)
+*   [Download HPLIP for Debian](https://sourceforge.net/projects/hplip/files/hplip/3.23.8/hplip-3.23.8.run/download?use_mirror=nchc)
+
+
+### `HPLIP` installieren
+
+```
+root@debianvm:~# 
+root@debianvm:~# apt install hplip
+```
+
+**Test ausführen**
+
+```
+root@debianvm:~# scanimage -L
+device `hpaio:/usb/Officejet_Pro_8600?serial=CN2C1CXJGN05KC' is a Hewlett-Packard Officejet_Pro_8600 all-in-one
+```
+
+**Zugriffsrechte für user `marcus` einstellen**
+
+```
+root@debianvm:~# ll /dev/bus/usb/002/003
+crw-rw-r-- 1 root lp 189, 130 17. Okt 09:35 /dev/bus/usb/002/003
+
+# Add myself to the lp group
+root@debianvm:~# usermod --append --groups lp marcus
+
+# check groups entry
+root@debianvm:~#  cat /etc/group | grep -i marcus
+lp:x:7:marcus
+scanner:x:109:saned,marcus
+```
+
+dann nochmal neu mit user `marcus` anmelden und `test_officejet.sh` ausführen:
+
+```
+#!/usr/bin/env bash
+
+SCANNER_DEVICE='hpaio:/usb/Officejet_Pro_8600?serial=CN2C1CXJGN05KC'
+TARGET_DIRECTORY='/home/marcus'
+DOCUMENT_ID='test'
+scanimage \
+    --device-name=${SCANNER_DEVICE} \
+    --format=tiff \
+    --source 'Flatbed' \
+    --mode 'Color' \
+    --resolution 300 \
+    --brightness 1000 \
+    --contrast 1000 \
+    --compression None \
+> "${TARGET_DIRECTORY}/${DOCUMENT_ID}.tiff"
+```

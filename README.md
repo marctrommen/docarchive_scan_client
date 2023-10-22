@@ -1,7 +1,5 @@
 # README
 
-[TOC]
-
 ## Introduction
 
 This *Scan Client* represents one part of a multipart *Document Archive* 
@@ -17,13 +15,13 @@ The *Document Archive* solution exists of
 	with that meta data.
 
 *	a *Web Page Generator* which generates out of the scanned documents and the 
-	gathered meta data a static HTML web page. Alle documents are organized
+	gathered meta data a static HTML web page. All documents are organized
 	in an index organized by two search criterias:
 
 	*	grouped by **year of document date** and then sorted by 
 		*descending document date*
 	
-	*	grouped by **one keyword of the document's keyword list**  and then 
+	*	grouped by **one keyword of the document's keyword list** and then 
 		sorted by *descending document date*
 	
 	Each list entry is linked to one document, represented by it's PDF file.
@@ -32,7 +30,7 @@ The *Document Archive* solution exists of
 	web browser app (e.g. Google Chrome or Firefox) or hosted on a simple
 	web server, which runs with Apache or NGINX or any other simalar web server.
 
-	For detailed information about the *Web Page Generator*, please refert to
+	For detailed information about the *Web Page Generator*, please refer to
 	[GitHup: Web Page Generator](https://github.com/marctrommen/docarchive_web_generator)
 
 **Hint**: The content of a document can be characterized not only by one
@@ -44,7 +42,7 @@ keyword, but by many keywords, too.
 ## Preconditions / Required Programs
 
 The *Scan Client* uses heavily additional applications. Therefore these 
-applications need to get already installed:
+applications need to get installed as follows:
 
 
 ### Installation of Python3
@@ -230,7 +228,7 @@ You should get an output similar to this
 
 ## Download and Configuration of the Scan_Client Application
 
-Now you can download the remaining files fo the GitHub project into the 
+Now you can download the remaining files of the GitHub project into the 
 virtual environment.
 
 Following files need to be changed with an text editor of your choice 

@@ -1,5 +1,16 @@
 #!/usr/bin/env bash
 
+"""Sets up the local environment of the user for the script config_handler.sh
+
+Sets up the local environment of the user for the script config_handler.sh
+As it is a template, please copy it first to a file named 
+"config_handler.sh"!
+
+After copy, it is strongly recommended to check all necessary parameters and
+to change them accordingly for the local environment!
+
+This script is getting sourced by all other Bash scripts of this project!
+"""
 # =============================================================================
 # IMPORTANT:
 #
@@ -26,7 +37,7 @@
 # =============================================================================
 
 # -----------------------------------------------------------------------------
-# FUNCTIION write_config ()
+# FUNCTION write_config ()
 # write current variables to a config file for further use by other scripts
 # INPUT
 #     none
@@ -74,7 +85,7 @@ EOF
 
 
 # -----------------------------------------------------------------------------
-# FUNCTIION reset_config ()
+# FUNCTION reset_config ()
 # resets some variables of the config file to 
 #     *   empty strings (if string variables)
 #     *   zero (if numeric variables)

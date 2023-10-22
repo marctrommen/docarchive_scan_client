@@ -229,7 +229,7 @@ You should get an output similar to this
 ## Download and Configuration of the Scan_Client Application
 
 Now you can download the remaining files of the GitHub project into the 
-virtual environment.
+virtual environment or you can just clone the current git archive.
 
 Following files need to be changed with an text editor of your choice 
 (e.g. vim):
@@ -248,8 +248,12 @@ Following files need to be changed with an text editor of your choice
 	
 		PROJECT_DIR=/path/to/scan_client
 
-*	`config_handler.sh`
+*	copy `config_handler_template.sh` to `config_handler.sh`
 
-	Edit the following line:
+		$> cp config_handler_template.sh config_handler.sh
+	
+	and edit the following line:
 
 		SCAN_ARCHIVE_BASE_DIRECTORY="/path/to/document_archive"
+
+	

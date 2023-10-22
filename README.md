@@ -1,4 +1,145 @@
+# README
+
+[TOC]
+
+## Introduction
+
+This *Scan Client* represents one part of a multipart *Document Archive* 
+solution.
+
+The *Document Archive* solution exists of
+
+*	a *Scan Client* which is responsible for scanning documents, optimizing the
+	scan quality, minimizing the scan files in file size, gathering meta data 
+	(e.g. list of keywords to characterize the content of document, 
+	document title, document date), creating an unique document id and 
+	transforms from single and multipage scanned documents PDF files, enriched 
+	with that meta data.
+
+*	a *Web Page Generator* which generates out of the scanned documents and the 
+	gathered meta data a static HTML web page. Alle documents are organized
+	in an index organized by two search criterias:
+
+	*	grouped by **year of document date** and then sorted by 
+		*descending document date*
+	
+	*	grouped by **one keyword of the document's keyword list**  and then 
+		sorted by *descending document date*
+	
+	Each list entry is linked to one document, represented by it's PDF file.
+
+	That static HTML web page can either browsed locally, filebased with a 
+	web browser app (e.g. Google Chrome or Firefox) or hosted on a simple
+	web server, which runs with Apache or NGINX or any other simalar web server.
+
+	For detailed information about the *Web Page Generator*, please refert to
+	[GitHup: Web Page Generator](https://github.com/marctrommen/docarchive_web_generator)
+
+**Hint**: The content of a document can be characterized not only by one
+keyword, but by many keywords, too.
+
+
 # Installation of Scan Client
+
+## Preconditions / Required Programs
+
+The *Scan Client* uses heavily additional applications. Therefore these 
+applications need to get already installed:
+
+
+### Installation of Python3
+
+refer to [FOSS Linux - Your complete guide to installing Python on Debian](https://www.fosslinux.com/122774/your-complete-guide-to-installing-python-on-debian.htm)
+
+```
+root@debianvm:~# apt install python3 python3-pip
+root@debianvm:~# python3 --version
+Python 3.11.2
+
+root@debianvm:~# pip3 --version
+pip 23.0.1 from /usr/lib/python3/dist-packages/pip (python 3.11)
+```
+
+### GIT client installed?
+
+```
+root@debianvm:~# git --version
+git version 2.39.2
+```
+
+### Installation of `rsync`
+
+```
+root@debianvm:~# apt update
+root@debianvm:~# apt install rsync
+root@debianvm:~# rsync --version
+rsync  version 3.2.7  protocol version 31
+```
+
+### Installation of `wget`
+
+```
+root@debianvm:~# wget --version
+GNU Wget 1.21.3 übersetzt unter linux-gnu.
+```
+
+### Installation of `curl`
+
+```
+root@debianvm:~# curl --version
+curl 7.88.1 (x86_64-pc-linux-gnu) ...
+```
+
+### Installation of *Linux Scan-Tools*
+
+```
+root@debianvm:~# apt install sane
+root@debianvm:~# apt install libsane
+```
+
+Test of successful installation:
+
+```
+root@debianvm:~# scanimage --version
+scanimage (sane-backends) 1.1.1-debian; backend version 1.1.1
+```
+
+### Installation of `imagemagik`
+
+refer to [How to Install ImageMagick on Debian 12, 11 or 10](https://www.linuxcapable.com/how-to-install-imagemagick-on-debian-linux/)
+
+```
+root@debianvm:~# apt install libpng-dev libjpeg-dev libtiff-dev
+root@debianvm:~# apt install imagemagick
+```
+
+Test of successful installation:
+
+```
+root@debianvm:~# convert --version
+Version: ImageMagick 6.9.11-60 Q16 x86_64 2021-01-25 https://imagemagick.org
+...
+```
+
+### Installation of `dialog`
+
+```
+root@debianvm:~# apt install dialog
+```
+
+Test of successful installation:
+
+```
+root@debianvm:~# dialog --version
+Version: 1.3-20230209
+```
+
+
+## Installing the Scan Support for locally used Scanners
+
+For details on *Installing the scan support for your scanner* please refer to
+[Scanner Installation and Configuration](./doc/scanner_installation_configuration.md).
+
 
 ## Minimal Requirements
 

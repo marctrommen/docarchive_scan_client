@@ -10,7 +10,7 @@
 # LAST CHANGE ... 2022-01-03
 # =============================================================================
 
-PROJECT_DIR=/home/marco/Scratchbook/docarchiv/scan_client
+PROJECT_DIR=/home/marco/scratch/docarchive_scan_client
 
 	cd ${PROJECT_DIR}
 	source ${PROJECT_DIR}/bin/activate

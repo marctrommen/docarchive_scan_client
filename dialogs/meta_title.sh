@@ -57,8 +57,8 @@ fi
 # --------------------------
 # Dialog: document_title
 # --------------------------
-let "USER_EXIT=0"
-while [[ ${USER_EXIT} -eq 0 ]]; do
+let "ANSWER_DONE=0"
+while [[ ${ANSWER_DONE} -eq 0 ]]; do
 	QUESTION="Dokumenttitel / Betreff?"
 	INPUT=$(printf '"%s"' '$ANSWER')
 	COMMAND="${DIALOG} --backtitle '${BACKTITEL}' --title '${TITEL}' --no-cancel --no-shadow --inputbox '${QUESTION}' 8 75"
@@ -81,7 +81,7 @@ while [[ ${USER_EXIT} -eq 0 ]]; do
 			"Dokumenttitel ist ein Muss-Feld und darf nicht leer sein!"
 	else
 		SCAN_DOCUMENT_TITLE="${ANSWER}"
-		let "USER_EXIT=1"
+		let "ANSWER_DONE=1"
 		write_config
 	fi
 done
